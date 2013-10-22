@@ -1,0 +1,22 @@
+#:kivy 1.0
+
+BoxLayout:
+    orientation:  'vertical'
+    
+    BoxLayout:
+        orientation:  'horizontal'
+        size_hint: (1, .2)
+        Button:
+            text: "Zieltemperatur"
+            id: btn_target_temperature
+        Button:
+            text: "Timer stellen"
+            id: btn_set_timer
+    
+    Label:
+        size_hint: (1, .8)
+        text: "0.0 °C"
+        id: temperature
+        font_size: 400
+            
+        
