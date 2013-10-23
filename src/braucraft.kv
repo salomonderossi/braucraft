@@ -1,31 +1,77 @@
 #:kivy 1.0
+#<TimerWidget>
 
+#:set button_font_size 40
+#:set label_font_size 60
 
-<BraucraftController>:
-    orientation:  'vertical'
+#:import CyclicRoulette kivy.garden.roulette.CyclicRoulette
+
+<TimerWidget>:
     lbl_temperature: label_temperature
-    btn_target_temperature: button_target_temperature
-    btn_timer: button_timer
-    #btn_exit: button_exit
 
     BoxLayout:
-        orientation:  'horizontal'
-        size_hint: (1, .2)
-        Button:
-            text: "Zieltemperatur"
-            id: button_target_temperature
-        Button:
-            text: "Timer stellen"
-            id: button_timer
-#        Button:
-#            text: "Beenden"
-#            id: button_exit
-#            on_press: exit
-    
-    Label:
-        size_hint: (1, .8)
-        text: "000.0 °C"
-        id: label_temperature
-        font_size: 300
-            
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint: (1, .2)
+            Button:
+                text: "Hauptmenü"
+                font_size: button_font_size
+                on_release: root.manager.current = "main"
+            Button:
+                text: "Start"
+                font_size: button_font_size
+            Button:
+                text: "Stop"
+                font_size: button_font_size
+            Label:
+                text: "000 min"
+                font_size: button_font_size
+                id: label_target_temperature
         
+        BoxLayout:
+            CyclicRoulette:
+                cycle: 200
+                density: 8.8
+                zero_indexed: False
+                format_spec: '{:d} min'
+                width: 200
+            Label:
+                size_hint: (1, .8)
+                text: "000.0 °C"
+                id: label_temperature
+                font_size: 250
+            
+
+<MainWidget>:
+    lbl_temperature: label_temperature
+    lbl_target_temperature: label_target_temperature
+    lbl_timer_temperature: label_timer_temperature
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint: (1, .2)
+            Button:
+                text: "Zieltemperatur"
+                font_size: button_font_size
+            Label:
+                id: label_target_temperature
+                text: "000.00 °C"
+                font_size: label_font_size
+            Button:
+                text: "Timer stellen"
+                font_size: button_font_size
+                on_release: root.manager.current = "timer"
+            Label:
+                text: "000 min"
+                font_size: label_font_size
+                id: label_timer_temperature
+         
+        Label:
+            size_hint: (1, .8)
+            text: "000.0 °C"
+            id: label_temperature
+            font_size: 300
+            
