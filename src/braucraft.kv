@@ -3,21 +3,29 @@
 
 <BraucraftController>:
     orientation:  'vertical'
+    lbl_temperature: label_temperature
+    btn_target_temperature: button_target_temperature
+    btn_timer: button_timer
+    #btn_exit: button_exit
 
     BoxLayout:
         orientation:  'horizontal'
         size_hint: (1, .2)
         Button:
             text: "Zieltemperatur"
-            id: btn_target_temperature
+            id: button_target_temperature
         Button:
             text: "Timer stellen"
-            id: btn_set_timer
+            id: button_timer
+#        Button:
+#            text: "Beenden"
+#            id: button_exit
+#            on_press: exit
     
     Label:
         size_hint: (1, .8)
-        text: "0.0 °C"
-        id: temperature
-        font_size: 400
+        text: "000.0 °C"
+        id: label_temperature
+        font_size: 300
             
         
