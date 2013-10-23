@@ -8,6 +8,7 @@
 
 <TimerWidget>:
     lbl_temperature: label_temperature
+    lbl_timer_value: label_timer_value
 
     BoxLayout:
         orientation: 'vertical'
@@ -27,15 +28,15 @@
             Label:
                 text: "000 min"
                 font_size: button_font_size
-                id: label_target_temperature
+                id: label_timer_value
         
         BoxLayout:
             CyclicRoulette:
                 cycle: 200
                 density: 8.8
                 zero_indexed: False
-                format_spec: '{:d} min'
                 width: 200
+                #on_centered: root.lbl_timer_value.text = str(args[0])
             Label:
                 size_hint: (1, .8)
                 text: "000.0 °C"
@@ -46,7 +47,7 @@
 <MainWidget>:
     lbl_temperature: label_temperature
     lbl_target_temperature: label_target_temperature
-    lbl_timer_temperature: label_timer_temperature
+    lbl_timer_value: label_timer_value
 
     BoxLayout:
         orientation: 'vertical'
@@ -67,7 +68,7 @@
             Label:
                 text: "000 min"
                 font_size: label_font_size
-                id: label_timer_temperature
+                id: label_timer_value
          
         Label:
             size_hint: (1, .8)
