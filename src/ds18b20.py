@@ -5,6 +5,7 @@ import time
 import Queue
 import os
 import glob
+import time
 
 from kivy.logger import Logger as log
 
@@ -26,8 +27,9 @@ class DS18B20(Thread):
 
         if self._running_on_rpi:
             log.info("Setting up temperature sensors")
-            #os.system('modprobe w1-gpio')
-            #os.system('modprobe w1-therm')
+            os.system('sudo modprobe w1-gpio')
+            os.system('sudo modprobe w1-therm')
+            time.sleep(0.1)
 
             self._base_dir = '/sys/bus/w1/devices/'
             self._device_folder = glob.glob(self._base_dir + '28*')[0]
