@@ -5,10 +5,12 @@
 #:set label_font_size 60
 
 #:import CyclicRoulette kivy.garden.roulette.CyclicRoulette
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
 
 <TimerWidget>:
-    lbl_temperature: label_temperature
-    lbl_timer_value: label_timer_value
+    label_temperature: lbl_temperature
+    label_timer_value: lbl_timer_value
+    roulette_time: rlt_time
 
     BoxLayout:
         orientation: 'vertical'
@@ -28,7 +30,7 @@
             Label:
                 text: "000 min"
                 font_size: button_font_size
-                id: label_timer_value
+                id: lbl_timer_value
         
         BoxLayout:
             CyclicRoulette:
@@ -36,18 +38,18 @@
                 density: 8.8
                 zero_indexed: False
                 width: 200
-                #on_centered: root.lbl_timer_value.text = str(args[0])
+                id: rlt_time
             Label:
                 size_hint: (1, .8)
                 text: "000.0 °C"
-                id: label_temperature
+                id: lbl_temperature
                 font_size: 250
             
 
 <MainWidget>:
-    lbl_temperature: label_temperature
-    lbl_target_temperature: label_target_temperature
-    lbl_timer_value: label_timer_value
+    label_temperature: lbl_temperature
+    label_target_temperature: lbl_target_temperature
+    label_timer_value: lbl_timer_value
 
     BoxLayout:
         orientation: 'vertical'
@@ -58,7 +60,7 @@
                 text: "Zieltemperatur"
                 font_size: button_font_size
             Label:
-                id: label_target_temperature
+                id: lbl_target_temperature
                 text: "000.00 °C"
                 font_size: label_font_size
             Button:
@@ -68,11 +70,11 @@
             Label:
                 text: "000 min"
                 font_size: label_font_size
-                id: label_timer_value
+                id: lbl_timer_value
          
         Label:
             size_hint: (1, .8)
             text: "000.0 °C"
-            id: label_temperature
+            id: lbl_temperature
             font_size: 300
             
