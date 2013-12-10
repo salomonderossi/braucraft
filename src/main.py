@@ -15,6 +15,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.screenmanager import WipeTransition
 from kivy.properties import NumericProperty
 from kivy.event import EventDispatcher
+from kivy.clock import Clock
 
 from kivy.logger import Logger as log
 
@@ -22,12 +23,29 @@ from ds18b20 import DS18B20
 
 class TimerWidget(Screen):
 
+    timer_started = False
+    timer_paused = False
+    timer_value = 0
+    
     def set_temperature(self, instance, temperature):
         self.label_temperature.text = "%05.1f °C" % temperature
 
-    def on_time_changed(self, instance, time_value):
-        print instance
-        print time_value
+    def time_changed(self, instance, time_value):
+        self.label_timer_value.text = "%03i min" % time_value
+
+    def start_stop_timer(self, instance):
+        print "start stop timer"
+        print "Selected time: %s" % self.roulette_time.selected_value
+        self.timer_value = self.roulette_time.selected_value
+        Clock.schedule_interval(self.update_timer, 1)  # call the update method every second
+        #Clock.schedule_once(self.update_timer, 1)  # call the update method in one second
+
+    def pause_resume_timer(self, instance):
+        print "pause resume timer"
+        print "Selected time: %s" % self.roulette_time.selected_value
+
+    def update_timer(self, dt):
+        print dt  # shows when the callback was called as float
 
 class MainWidget(Screen):
 
@@ -57,7 +75,7 @@ class BraucraftApp(App, EventDispatcher):
         log.info("Creating TimerWidget")
         timer_widget = TimerWidget(name="timer")
         self.bind(temperature=timer_widget.set_temperature)
-        timer_widget.roulette_time.bind(rolling_value=timer_widget.on_time_changed)
+        timer_widget.roulette_time.bind(rolling_value=timer_widget.time_changed)
         screen_manager.add_widget(timer_widget)
 
         return screen_manager

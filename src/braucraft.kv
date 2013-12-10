@@ -10,6 +10,8 @@
 <TimerWidget>:
     label_temperature: lbl_temperature
     label_timer_value: lbl_timer_value
+    button_start_stop: btn_start_stop
+    button_pause_resume: btn_pause_resume
     roulette_time: rlt_time
 
     BoxLayout:
@@ -22,11 +24,17 @@
                 font_size: button_font_size
                 on_release: root.manager.current = "main"
             Button:
-                text: "Start"
+                text: "Starten"
+                on_release: root.start_stop_timer(args)
                 font_size: button_font_size
+                background_color: [0.05, 1, 0.05, 1]
+                id: btn_start_stop
             Button:
-                text: "Stop"
+                text: "Anhalten"
+                on_release: root.pause_resume_timer
                 font_size: button_font_size
+                disabled: True
+                id: btn_pause_resume
             Label:
                 text: "000 min"
                 font_size: button_font_size
